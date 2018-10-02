@@ -1,0 +1,20 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {Todo} from '../../../shared/models/todo.model';
+
+@Component({
+  selector: 'app-task',
+  templateUrl: './task.component.html',
+  styleUrls: ['./task.component.css']
+})
+export class TaskComponent implements OnInit {
+  @Input() todo: Todo;
+  @Input() task: string;
+  @Input() completed: boolean;
+  @Input() completedBy: string;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
