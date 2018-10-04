@@ -1,20 +1,25 @@
 <div class="row">
   <div class="col-6">
+    <h2>Completed:</h2>
+    <hr>
     <ul class="list-group">
-      <h2>Completed:</h2>
       <app-task *ngFor="let todo of completedTodos"
                 [task]="todo.task"
                 [completed]="todo.completed"
-                [completedBy]="todo.completedBy"></app-task>
+                [completedBy]="todo.completedBy"
+                [_id]="todo._id"></app-task>
     </ul>
   </div>
   <div class="col-6">
+    <h2>Pending:</h2>
+    <hr>
     <ul class="list-group">
-      <h2>Pending:</h2>
+      <h3 *ngIf="pendingTodos.length === 0" class="text-primary">All tasks are completed!</h3>
       <app-task *ngFor="let todo of pendingTodos"
                 [task]="todo.task"
                 [completed]="todo.completed"
-                [completedBy]="todo.completedBy"></app-task>
+                [completedBy]="todo.completedBy"
+                [_id]="todo._id"></app-task>
     </ul>
   </div>
 </div>

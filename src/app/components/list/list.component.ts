@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
 import {Todo} from '../../shared/models/todo.model';
 import {TodoService} from '../../shared/services/todo.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, DoCheck, OnDestroy {
+  getTasksSubscription: Subscription;
   todos: Todo[];
   completedTodos: Todo[] = [];
   pendingTodos: Todo[] = [];
@@ -15,7 +17,7 @@ export class ListComponent implements OnInit {
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
-    this.todoService.getTasks().subscribe(todos => {
+    this.getTasksSubscription = this.todoService.getTasks().subscribe(todos => {
       this.todos = todos;
 
       for (const todo of this.todos) {
@@ -28,4 +30,20 @@ export class ListComponent implements OnInit {
     });
   }
 
+  ngDoCheck() {
+    if (this.todos) {
+      for (const todo of this.pendingTodos) {
+        if (todo.completed) {
+          this.completedTodos.push(todo);
+          this.pendingTodos.slice(this.pendingTodos.indexOf(todo), 1);
+        }
+      }
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.getTasksSubscription !== undefined) {
+      this.getTasksSubscription.unsubscribe();
+    }
+  }
 }

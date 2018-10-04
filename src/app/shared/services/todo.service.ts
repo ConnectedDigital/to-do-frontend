@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Todo} from '../models/todo.model';
 
 @Injectable()
 export class TodoService {
+  token = localStorage.getItem('token');
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,10 +18,20 @@ export class TodoService {
   }
 
   addTask(task: Todo): Observable<Todo> {
-    return this.httpClient.post<Todo>('/api/todos', task);
+    const headers = new HttpHeaders()
+      .append('x-auth', this.token);
+
+    return this.httpClient.post<Todo>('/api/todos', task, {
+      headers: headers
+    });
   }
 
-  completeTask(task: Todo): Observable<Todo> {
-    return this.httpClient.put<Todo>('/api/todos', task);
+  completeTask(id: string, task: any): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('x-auth', this.token);
+
+    return this.httpClient.put<any>('/api/todos/' + id, task, {
+      headers: headers
+    });
   }
 }

@@ -1,10 +1,13 @@
 <nav class="navbar navbar-dark bg-primary">
   <div class="col-8 text-left">
     <a class="navbar-brand" href="#">Todo App</a>
+    <button *ngIf="token !== null" class="btn btn-outline-light" type="button" data-toggle="modal" data-target="#add-task-modal">Add Task</button>
   </div>
   <div class="col-4 text-right">
-    <button class="btn btn-outline-light" type="button" data-toggle="modal" data-target="#sign-in-modal">Sign In</button>
-    <button class="btn btn-outline-light" type="button" data-toggle="modal" data-target="#sign-up-modal">Sign Up</button>
+    <a *ngIf="token !== null" class="navbar-brand" href="#">{{username}}</a>
+    <button *ngIf="token === null" class="btn btn-outline-light" type="button" data-toggle="modal" data-target="#sign-in-modal">Sign In</button>
+    <button *ngIf="token === null" class="btn btn-outline-light" type="button" data-toggle="modal" data-target="#sign-up-modal">Sign Up</button>
+    <button *ngIf="token !== null" class="btn btn-outline-light" type="button" (click)="onLogOut()">Log Out</button>
   </div>
 </nav>
 
@@ -12,7 +15,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="sign-in-modalLabel">Sign In</h5>
+        <h5 class="modal-title">Sign In</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -28,13 +31,29 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="sign-up-modalLabel">Sign Up</h5>
+        <h5 class="modal-title">Sign Up</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <app-sign-up></app-sign-up>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add-task-modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-add-task></app-add-task>
       </div>
     </div>
   </div>

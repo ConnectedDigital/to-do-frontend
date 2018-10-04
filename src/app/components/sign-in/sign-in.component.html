@@ -1,13 +1,11 @@
 <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="email">E-mail:</label>
-    <input [formControlName]="'email'" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="example@domain.com">
+    <label for="auth-email">E-mail:</label>
+    <input [formControlName]="'email'" type="email" class="form-control" id="auth-email" aria-describedby="emailHelp" placeholder="example@domain.com">
   </div>
   <div class="form-group">
-    <label for="password">Password:</label>
-    <input [formControlName]="'password'" type="password" class="form-control" id="password" placeholder="********">
+    <label for="auth-password">Password:</label>
+    <input [formControlName]="'password'" type="password" class="form-control" id="auth-password" placeholder="********">
   </div>
-  <div class="text-right">
-    <button type="submit" class="btn btn-block btn-outline-primary">Sign In</button>
-  </div>
+  <button type="submit" class="btn btn-block btn-outline-primary">Sign In</button>
 </form>

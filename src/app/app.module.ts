@@ -14,6 +14,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {TodoService} from './shared/services/todo.service';
 import {UserService} from './shared/services/user.service';
 import {AuthenticationService} from './shared/services/authentication.service';
+import { AddTaskComponent } from './components/add-task/add-task.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {AuthenticationService} from './shared/services/authentication.service';
     TaskComponent,
     HeaderComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,
